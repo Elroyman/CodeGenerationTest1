@@ -1,0 +1,21 @@
+﻿<#@ template language="C#" #>
+<#@ assembly name="System.Core" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.Collections.Generic" #>
+
+using ServiceStack;
+namespace CodeGenerationTest1{
+
+	[Route("/<#= testinput #>/{Name}")]
+    public class <#= testinput #> : IReturn<<#= testinput #>Response>
+    {
+        public string Name { get; set; }
+    }
+
+    public class <#= testinput #>Response
+    {
+        public string Result { get; set; }
+    }
+}
+
