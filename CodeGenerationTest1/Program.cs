@@ -7,6 +7,7 @@ using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.CSharp;
+using System.IO;
 
 namespace CodeGenerationTest1
 {
@@ -14,9 +15,7 @@ namespace CodeGenerationTest1
     {
         static void Main(string[] args)
         {
-            //new DesignTimeCodeGeneratorTest().TestMethod();
             var c1 = new ServiceModelRuntimeGenerator("Hello").TransformText();
-
             var c2 = new ServiceClassRuntimeGenerator("Hello").TransformText();
             var c3 = new AppHostRuntimeGenerator("Hello").TransformText();
             var c4 = new SelfHostRuntimeGenerator("Hello").TransformText();
@@ -33,8 +32,7 @@ namespace CodeGenerationTest1
             parameters.ReferencedAssemblies.Add("ServiceStack.Client.dll");
             parameters.ReferencedAssemblies.Add("ServiceStack.Common.dll");
             parameters.ReferencedAssemblies.Add("ServiceStack.Interfaces.dll");
-            parameters.ReferencedAssemblies.Add("ServiceStack.Text.dll");
-            
+            parameters.ReferencedAssemblies.Add("ServiceStack.Text.dll");            
 
 
             // True - memory generation, false - external file generation
@@ -42,19 +40,21 @@ namespace CodeGenerationTest1
 
             // True - exe file generation, false - dll file generation
             parameters.GenerateExecutable = true;
-            parameters.OutputAssembly = "TestPublish\\CodeGeneratedService.exe";
 
-            //TODO: copy the dlls to the necessary same folder as the exe
+            var installDir = Path.Combine(Environment.CurrentDirectory,"TestPublish");
+            Directory.CreateDirectory(installDir);
 
+            parameters.OutputAssembly = Path.Combine(installDir, "CodeGeneratedService.exe");
+            
+            var filesToCopy = new[] { "ServiceStack.dll", "ServiceStack.Client.dll", "ServiceStack.Common.dll", "ServiceStack.Interfaces.dll", "ServiceStack.Text.dll" };
 
-            //this method doesn't work, but actually copying the dlls into the publish folder is probably a better idea anyway
-            //parameters.EmbeddedResources.Add("ServiceStack.dll");
-            //parameters.EmbeddedResources.Add("ServiceStack.Client.dll");
-            //parameters.EmbeddedResources.Add("ServiceStack.Common.dll");
-            //parameters.EmbeddedResources.Add("ServiceStack.Interfaces.dll");
-            //parameters.EmbeddedResources.Add("ServiceStack.Text.dll");
+            foreach (var file in filesToCopy)
+            {
+                var serviceStackDllLoc = Directory.GetParent(Directory.GetCurrentDirectory()).Parent.FullName + @"\Resources\" + file;
+                var destinationLoc = installDir + @"\" + file;
+                File.Copy(serviceStackDllLoc, destinationLoc, true);
+            }
 
-            //parameters.CompilerOptions = @" /out:C:\TestGeneration\CodeGeneratedService.exe";
             CompilerResults results = provider.CompileAssemblyFromSource(
                 parameters,
                 c1,
@@ -73,29 +73,14 @@ namespace CodeGenerationTest1
 
                 throw new InvalidOperationException(sb.ToString());
             }
-            //Assembly assembly = results.CompiledAssembly;
-            //Type program = assembly.GetType("CodeGenerationTest1.Program");
-            //MethodInfo main = program.GetMethod("Main");
-            //main.Invoke(null,null);
+
             Console.WriteLine(results.PathToAssembly);
             Console.WriteLine("An attempt to save the exe was made.");
 
             Console.ReadLine();
         }
-
-
     }
-
-    partial class RuntimeTestTemplate
-    {
-
-        string testinput;
-        public RuntimeTestTemplate(string input)
-        {
-            testinput = input;
-        }
-
-    }
+    
     partial class ServiceModelRuntimeGenerator
     {
 

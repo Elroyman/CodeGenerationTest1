@@ -18,7 +18,7 @@ namespace CodeGenerationTest1
     /// Class to produce the template output
     /// </summary>
     
-    #line 1 "c:\users\james pusateri\documents\visual studio 2015\Projects\CodeGenerationTest1\CodeGenerationTest1\RuntimeTestTemplate.tt"
+    #line 1 "C:\Users\James Pusateri\Documents\Visual Studio 2015\Projects\CodeGenerationTest1\CodeGenerationTest1\RuntimeTestTemplate.tt"
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.TextTemplating", "14.0.0.0")]
     public partial class RuntimeTestTemplate : RuntimeTestTemplateBase
     {
@@ -28,30 +28,30 @@ namespace CodeGenerationTest1
         /// </summary>
         public virtual string TransformText()
         {
-            this.Write("\r\nusing ServiceStack;\r\nnamespace CodeGenerationTest1{\r\n\r\n\t[Route(\"/hello/{Name}\")" +
-                    "]\r\n    public class ");
+            //this.Write("\r\nusing ServiceStack;\r\nnamespace CodeGenerationTest1{\r\n\r\n\t[Route(\"/hello/{Name}\")" +
+            //        "]\r\n    public class ");
             
-            #line 11 "c:\users\james pusateri\documents\visual studio 2015\Projects\CodeGenerationTest1\CodeGenerationTest1\RuntimeTestTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(testinput));
+            //#line 11 "C:\Users\James Pusateri\Documents\Visual Studio 2015\Projects\CodeGenerationTest1\CodeGenerationTest1\RuntimeTestTemplate.tt"
+            //this.Write(this.ToStringHelper.ToStringWithCulture(testinput));
             
-            #line default
-            #line hidden
-            this.Write(" : IReturn<");
+            //#line default
+            //#line hidden
+            //this.Write(" : IReturn<");
             
-            #line 11 "c:\users\james pusateri\documents\visual studio 2015\Projects\CodeGenerationTest1\CodeGenerationTest1\RuntimeTestTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(testinput));
+            //#line 11 "C:\Users\James Pusateri\Documents\Visual Studio 2015\Projects\CodeGenerationTest1\CodeGenerationTest1\RuntimeTestTemplate.tt"
+            //this.Write(this.ToStringHelper.ToStringWithCulture(testinput));
             
-            #line default
-            #line hidden
-            this.Write("Response>\r\n    {\r\n        public string Name { get; set; }\r\n    }\r\n\r\n    public c" +
-                    "lass ");
+            //#line default
+            //#line hidden
+            //this.Write("Response>\r\n    {\r\n        public string Name { get; set; }\r\n    }\r\n\r\n    public c" +
+            //        "lass ");
             
-            #line 16 "c:\users\james pusateri\documents\visual studio 2015\Projects\CodeGenerationTest1\CodeGenerationTest1\RuntimeTestTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(testinput));
+            //#line 16 "C:\Users\James Pusateri\Documents\Visual Studio 2015\Projects\CodeGenerationTest1\CodeGenerationTest1\RuntimeTestTemplate.tt"
+            //this.Write(this.ToStringHelper.ToStringWithCulture(testinput));
             
-            #line default
-            #line hidden
-            this.Write("Response\r\n    {\r\n        public string Result { get; set; }\r\n    }\r\n}\r\n\r\n");
+            //#line default
+            //#line hidden
+            //this.Write("Response\r\n    {\r\n        public string Result { get; set; }\r\n    }\r\n}\r\n\r\n");
             return this.GenerationEnvironment.ToString();
         }
     }
